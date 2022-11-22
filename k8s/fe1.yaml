@@ -1,0 +1,21 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fe1
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: fe1
+          image: 114002956214.dkr.ecr.eu-central-1.amazonaws.com/fe1:latest
+          ports:
+            - containerPort: 8080
