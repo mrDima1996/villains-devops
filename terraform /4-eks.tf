@@ -88,12 +88,5 @@ module "eks" {
     }
   ]
 
-  aws_auth_users = [
-    {
-      userarn  = aws_iam_user.k8s_admin.arn
-      username = aws_iam_user.k8s_admin.name
-    }
-  ]
-
   tags = merge(local.tags, {})
 }

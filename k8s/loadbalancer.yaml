@@ -1,15 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    app: sonarqube
-  name: sonarqube
+  name: fe1-loadbalancer
 spec:
-  ports:
-    - name: sonar
-      port: 8080
-      protocol: TCP
-      targetPort: 8080
-  selector:
-    app: sonarqube
   type: LoadBalancer
+  selector:
+    app: fe1
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

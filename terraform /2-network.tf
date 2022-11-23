@@ -9,7 +9,6 @@ module "vpc" {
   azs             = ["${var.region}a", "${var.region}b", "${var.region}c"]
   private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
   public_subnets  = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
-  intra_subnets   = ["10.0.7.0/28", "10.0.7.16/28", "10.0.7.32/28"]
 
   enable_nat_gateway   = true
   single_nat_gateway   = true
@@ -37,10 +36,10 @@ resource "aws_security_group" "for_ssh" {
   vpc_id      = module.vpc.vpc_id
 
   ingress {
-    cidr_blocks = [ "0.0.0.0/0" ]
-    from_port = 22
-    protocol = "tcp"
-    to_port = 22
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
