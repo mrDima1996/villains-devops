@@ -2,23 +2,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fe1
+  name: be
   namespace: default
   labels:
-    app: fe1
+    app: be
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fe1
+      app: be
   template:
     metadata:
       labels:
-        app: fe1
+        app: be
     spec:
       containers:
-        - name: fe1
-          image: 114002956214.dkr.ecr.eu-central-1.amazonaws.com/fe1:latest
+        - name: be
+          image: 114002956214.dkr.ecr.eu-central-1.amazonaws.com/be:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8000
               protocol: TCP

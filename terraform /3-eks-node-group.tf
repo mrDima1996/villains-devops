@@ -5,8 +5,8 @@ module "eks_managed_node_group" {
   cluster_name    = module.eks.cluster_name
   cluster_version = module.eks.cluster_version
 
-  vpc_id                            = module.vpc.vpc_id
-  subnet_ids                        = module.vpc.private_subnets
+  vpc_id                            = aws_vpc.vpc.id
+  subnet_ids                        = ["${element(aws_subnet.private_subnet.*.id, 0)}", "${element(aws_subnet.private_subnet.*.id, 1)}", "${element(aws_subnet.private_subnet.*.id, 2)}", ]
   cluster_primary_security_group_id = module.eks.cluster_primary_security_group_id
   vpc_security_group_ids = [
     module.eks.cluster_security_group_id,

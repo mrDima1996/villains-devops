@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fancy-be
+  labels:
+    app: fancy-be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      lbtype: external
+      app: fancy-be
+  template:
+    metadata:
+      labels:
+        lbtype: external
+        app: fancy-be
+    spec:
+      containers:
+        - name: fancy-be
+          image: 114002956214.dkr.ecr.eu-central-1.amazonaws.com/be:latest
+          ports:
+            - containerPort: 8000
+              protocol: TCP

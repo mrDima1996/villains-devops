@@ -24,10 +24,8 @@ module "eks" {
   kms_key_deletion_window_in_days = 7
   enable_kms_key_rotation         = true
 
-  vpc_id                   = module.vpc.vpc_id
-  subnet_ids               = module.vpc.private_subnets
-  control_plane_subnet_ids = module.vpc.intra_subnets
-
+  vpc_id                   = aws_vpc.vpc.id
+  subnet_ids               = ["${element(aws_subnet.private_subnet.*.id, 0)}", "${element(aws_subnet.private_subnet.*.id, 1)}", "${element(aws_subnet.private_subnet.*.id, 2)}", ]
 
   # EKS Managed Node Group(s)
   eks_managed_node_group_defaults = {
@@ -35,7 +33,7 @@ module "eks" {
     instance_types = [var.instance_type, var.instance_type]
 
     attach_cluster_primary_security_group = true
-    vpc_security_group_ids                = [aws_security_group.for_ssh.id]
+    vpc_security_group_ids                = [aws_security_group.eks_sg.id]
   }
 
   eks_managed_node_groups = {

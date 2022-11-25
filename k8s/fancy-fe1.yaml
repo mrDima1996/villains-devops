@@ -2,22 +2,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fe1
-  namespace: default
+  name: fancy-fe1
   labels:
-    app: fe1
+    app: fancy-fe1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fe1
+      app: fancy-fe1
+      lbtype: external
   template:
     metadata:
       labels:
-        app: fe1
+        lbtype: external
+        app: fancy-fe1
     spec:
       containers:
-        - name: fe1
+        - name: fancy-fe1
           image: 114002956214.dkr.ecr.eu-central-1.amazonaws.com/fe1:latest
           ports:
             - containerPort: 8080

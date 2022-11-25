@@ -23,3 +23,16 @@ variable "secret_key" {
   type = string
 }
 
+variable "availability_zone" {
+  default = [ "eu-central-1a", "eu-central-1b", "eu-central-1c"]
+}
+
+variable "private_subnets" {
+  default = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+}
+
+variable "public_subnets" {
+  default = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+}
+
+
